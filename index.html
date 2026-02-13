@@ -358,6 +358,10 @@
                     <div class="stat-number">13</div>
                     <div class="stat-label">درس تفاعلي</div>
                 </div>
+                <div class="stat">
+                    <div class="stat-number" id="days-passed">0</div>
+                    <div class="stat-label">يوم منذ الانطلاق</div>
+                </div>
             </div>
         </section>
 
@@ -384,8 +388,7 @@
                     style="background: rgba(57,124,237,0.3); padding: 2px 8px; border-radius: 4px;">members.js</code>
             </p>
             <div class="members-grid" id="members-grid">
-                <!-- الأسماء تتحمّل هنا تلقائياً من members.js -->
-            </div>
+                </div>
             <p class="members-count" id="members-count"></p>
         </section>
 
@@ -424,6 +427,15 @@
             });
         })();
 
+        // دالة حساب الأيام المنقضية (الإضافة الجديدة)
+        function updateDaysCounter() {
+            const startDate = new Date('2026-02-01'); // تاريخ البداية
+            const today = new Date();
+            const diffTime = Math.abs(today - startDate);
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            document.getElementById('days-passed').textContent = diffDays;
+        }
+
         function getInitial(name) {
             return name.trim().charAt(0);
         }
@@ -454,6 +466,8 @@
             countEl.textContent = 'عدد المشاركين: ' + members.length;
         }
 
+        // تشغيل العداد عند تحميل الصفحة
+        updateDaysCounter();
         renderMembers();
     </script>
 </body>
